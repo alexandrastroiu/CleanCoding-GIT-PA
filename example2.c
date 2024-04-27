@@ -67,6 +67,7 @@ void insedg(int nr_of_vertices, int nr_of_edges, GRAPH *graph)
         add_edge(graph, src, dest);
     }
 }
+
 /// bfs utils
 int is_empty(NODE *queue)
 {
@@ -134,29 +135,29 @@ void wipe_visited_list(GRAPH *graph, int nr_of_vertices)
           graph->visited[i] = 0;
     }
 }
-// parcurgeri
 
-void DFS(GPH *graph, int vertex_nr)
+// parcurgeri
+void DFS(GRAPH *graph, int vertex_nr)
 {
      NODE *adj_list = graph->adjacency_lists[vertex_nr];
      NODE *temp = adj_list;
 
-    graph->visited[vertex_nr] = 1;
-    printf("%d->", vertex_nr);
+     graph->visited[vertex_nr] = 1;
+     printf("%d->", vertex_nr); 
 
-    while (temp != NULL)
-    {
-       int connected_vertex = temp->data;
+     while (temp != NULL)
+     {
+        int connected_vertex = temp->data;
 
-       if (graph->visited[connected_vertex] == 0)
-       {
-           DFS(graph, connected_vertex);
-       }
-       temp = temp->next;
-    }
+        if (graph->visited[connected_vertex] == 0)
+        {
+            DFS(graph, connected_vertex);
+        }
+        temp = temp->next;
+     }
 }
 
-void BFS(GPH *graph, int start)
+void BFS(GRAPH *graph, int start)
 {
     NODE *queue = NULL;
 
@@ -165,19 +166,19 @@ void BFS(GPH *graph, int start)
 
     while (!is_empty(queue))
     {
-       int current = dequeue(&queue);
-       printf("%d ", current);
+        int current = dequeue(&queue);
+        printf("%d ", current);
 
-       NODE *temp = graph->adjacency_lists[current];
+        NODE *temp = graph->adjacency_lists[current];
 
-            while (temp)
+            while (temp != NULL)
             {
             int adj_vertex = temp->data;
 
             if (graph->visited[adj_vertex] == 0)
             {
                 graph->visited[adj_vertex] = 1;
-                enqueue(&*queue, adj_vertex);
+                enqueue(&queue, adj_vertex);
             }
              temp = temp->next;
             }
