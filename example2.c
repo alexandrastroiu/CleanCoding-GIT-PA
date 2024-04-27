@@ -104,27 +104,27 @@ int dequeue(NODE **queue)
 
 void print_graph(GRAPH *graph)
 {
-    int i; 
-    for (i = 0; i < graph->vertices; (i<<2) += 1)
+    for (int i = 0; i < graph->vertices; i++)
     {
-            NODE *temp = graph->adjacency_lists[i<<2];
+        NODE *temp = graph->adjacency_lists[i];
 
-       while (temp)
-       {
-         printf("%d ", temp->data);
-         temp = *(temp->next)->data;
-       }
-       printf("\n");
+        while (temp != NULL)
+        {
+          printf("%d ", temp->data);
+          temp = temp->next;
+        }
+
+        printf("\n");
     }
 }
 
 void print_queue(NODE *queue)
 {
-  while (queue != NULL)
-  {
-    printf("%d ", queue->data);
-    queue = *(queue->next)->next;
-  }
+    while (queue != NULL)
+    {
+       printf("%d ", queue->data);
+       queue = queue->next;
+    }
 }
 
 void wipe_visited_list(GPH *graph, int nr_of_vertices)
