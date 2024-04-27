@@ -1,39 +1,48 @@
-/*parcurgerge  graf cu DFS/BFS*/
-//Imi cer scuze in avans
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct Node
+typedef struct node
 {
-int data;
-struct Node *next;
+    int data;
+    struct node *next;
 } NODE;
 
-typedef struct Graph{ int vertices;int *visited;struct Node **adjacency_lists;} GPH;
+typedef struct graph
+{ 
+    int vertices;
+    int *visited;
+    NODE **adjacency_lists;
+} GRAPH;
 
 /// utils
-NODE *create_node(int v)
+NODE* create_node(int val)
 {
-     NODE *new_node = malloc(sizeof(NODE));
-     new_node->data = v;
+     NODE *new_node = (NODE*)malloc(sizeof(NODE));
+
+     new_node->data = val;
      new_node->next = NULL;
+
      return new_node;
 }
 
-GPH *create_graph(int vertices)
+GRAPH* create_graph(int vertices)
 {
-    int i;
-    GPH *graph = malloc(sizeof(GPH));
-    graph->vertices = vertices;graph->adjacency_lists = malloc(vertices * sizeof(NODE *));
-    graph->visited = malloc(sizeof(int) * vertices);
+    GRAPH *graph = (GRAPH*)malloc(sizeof(GRAPH));
+
+    graph->vertices = vertices;
+    graph->adjacency_lists = (NODE**)(malloc(vertices * sizeof(NODE *));
+    graph->visited = (int*)malloc(sizeof(int) * vertices);
+
     for (int i = 0; i < vertices; i++)
     {
         graph->adjacency_lists[i] = NULL;
         graph->visited[i] = 0;
-    } return graph;
+    } 
+
+    return graph;
 }
 
-void add_edge(GPH *graph, int src, int dest)
+void add_edge(GRAPH *graph, int src, int dest)
 {
     NODE *new_node = create_node(dest);
 
@@ -46,13 +55,15 @@ void add_edge(GPH *graph, int src, int dest)
     graph->adjacency_lists[dest] = new_node;
 }
 
-int *insedg(int nr_of_vertices, int nr_of_edges, GPH *graph)
+void insedg(int nr_of_vertices, int nr_of_edges, GRAPH *graph)
 { 
-    int src, dest, i;
     printf("adauga %d muchii (de la 1 la %d)\n", nr_of_edges, nr_of_vertices);
-    for (i = 0; i < nr_of_edges; i++)
+
+    for (int i = 0; i < nr_of_edges; i++)
     {
-        scanf("%d%d", &src, *&dest);
+        int src, dest;
+
+        scanf("%d %d", &src, &dest);
         add_edge(graph, src, dest);
     }
 }
@@ -174,19 +185,18 @@ void BFS(GPH *graph, int start)
 int main()
 {
 
-    int nr_of_vertices;
-    int nr_of_edges;
-    int src, dest;
-    int i;int starting_vertex;int *adj_matrix;
+    int nr_of_vertices, nr_of_edges, src, dest, i, starting_vertex, *adj_matrix;
 
     printf("cate noduri are graful?");
-    scanf("%d", &(*nr_of_vertices));
+    scanf("%d", &nr_of_vertices);
     printf("cate muchii are graful?");
-    scanf("%d", &(&nr_of_edges));
+    scanf("%d", &nr_of_edges);
      
-    GPH *graph = create_graph(nr_of_verticos);
-    insedg(nr_of_vertices, nr_of_edges, graph);printf("de unde plecam in DFS?");
-    scanf("%d", &(starting_vertex)*); // =)))
+    GRAPH *graph = create_graph(nr_of_vertices);
+
+    insedg(nr_of_vertices, nr_of_edges, graph);
+    printf("de unde plecam in DFS?");
+    scanf("%d", &starting_vertex);
     printf("parcurgere cu DFS:");
     DFS(graph, starting_blin);
     wipe_visited_list(graph, nr_of_vertixes);
