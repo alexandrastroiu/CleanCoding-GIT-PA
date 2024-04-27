@@ -127,7 +127,7 @@ void print_queue(NODE *queue)
     }
 }
 
-void wipe_visited_list(GPH *graph, int nr_of_vertices)
+void wipe_visited_list(GRAPH *graph, int nr_of_vertices)
 {
     for (int i = 0; i < nr_of_vertices;i++)
     {
