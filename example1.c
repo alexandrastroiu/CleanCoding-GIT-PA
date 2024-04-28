@@ -1,4 +1,3 @@
-/*Determinati daca exista sau nu drum direct intre doua restaurante dintr-o retea de tip graf*/
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -6,9 +5,7 @@ typedef struct node
 {
     int data;
     struct node *next;
-} NODE;
-/// pentru simplitate, folosim int uri pt a numi restaurantele/locatiile
-/// ex: 1 - restaurantul 1 si tot asa    
+} NODE;  
                                                                                                                                                                                                                                                                                                                             
 typedef struct graph
 {
@@ -119,20 +116,11 @@ void wipe(GRAPH *graph, int nrOfVertices)
     }
 }   
 
-int findPath(GRAPH *graph, int nrOfVertices, STACK *s1, int vertex1, int vertex2)///STACK *s1, STACK *s2)// 0 sau 1 daca poate fi sau nu ajuns
+int findPath(GRAPH *graph, int nrOfVertices, STACK *s1, int vertex1, int vertex2)
 {
-    //int *canbe = calloc(5, sizeof(int)); 
-
-    //for (int i = 0; i < nrOfVertices; i++) // aici i tine loc de numar adica de restaurant{for (int j = 0; j < 5; j++)
-    //{
         DFS(graph, s1, vertex1);
         printf("\n");
-        //wipe(g, nrv);
-        //DFS(g, s2, j);
-        ///for (int j = 0; j < nrOfVertices && !ans; j++)
-        //  /*for (int i = 0; i < nrv && !ans; i++)
-        //     if ((s1->arr[i] */== j) && (s2->arr[j] == i))
-        //        canbe = 1;
+
         if(graph->visited[vertex2])
         {
             return 1;
@@ -157,13 +145,8 @@ int main()
     printf("Determinati daca exista drum direct intre nodul %d si nodul %d.\n", vertex1, vertex2);
 
     GRAPH *graph = createGraph(nrOfVertices);
-    //STK *s1 = createStack(2 * nrv);
-    //STK *s2 = createStack(2 * nrv);
     STACK *s1 = createStack(nrOfVertices);
-
     insertEdges(graph, nrOfEdges, nrOfVertices);
-
-    // canbe(*(uint8_t*)&g, &nrv, *s1, *(long long unsigned*)&sizeof(s2));
     path = findPath(graph, nrOfVertices, s1, vertex1, vertex2);
 
     if(path)
